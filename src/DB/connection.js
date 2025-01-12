@@ -1,17 +1,10 @@
+import mongoose from "mongoose";
 
-import { Sequelize } from "sequelize";
-
-export const sequelizeConfig = new Sequelize('blog_project_dev', 'root', '', {
-    host: 'localhost',
-    dialect: 'mysql',
-    logging: (msg) => console.log('Database query is: ' + msg),
-})
-
-export const database_connection = async ()=>{
+export const database_connection = async () => {
   try {
-      await sequelizeConfig.sync({alter:true, force:false});
-      console.log('Connection has been established successfully.');
-    } catch (error) {
-      console.error('Unable to connect to the database:', error);
-    }
+    await mongoose.connect('mongodb://localhost:27017/saraha_app_1')
+    console.log('Database connected');
+  } catch (error) {
+    console.log('Database not connected' ,  error);
+  }
 }

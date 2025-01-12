@@ -2,7 +2,7 @@
 import express from 'express'
 import controllerHandler from './utils/routers-handler.js'
 import {database_connection} from './DB/connection.js'
-
+import { config } from 'dotenv'
 
 /**
  * 
@@ -10,6 +10,9 @@ import {database_connection} from './DB/connection.js'
  */
 const bootstrap = async () => {
     const app = express()
+    config()
+    
+    const port = process.env.PORT || 3000
 
     app.use(express.json())
 
@@ -18,10 +21,10 @@ const bootstrap = async () => {
 
     database_connection()
     
-    app.listen(3000, () => {
+    app.listen(port, () => {
         console.log('Server running on port 3000')
     })
 }
 
 
-export default bootstrap    
+export default bootstrap
